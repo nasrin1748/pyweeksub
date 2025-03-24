@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Spring Bread</title>
+
+    <!-- Recommended meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Random Move and Stop Div</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-image:url("stream.png"); /* Optional: Add a background color */
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #canvasContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1600px; /* Adjust the width as needed */
+            height: 600px; /* Adjust the height as needed */
+            border: 2px solid black; /* Optional: Add a border */
+        }
+        #myCanvas {
+            width: 100%;
+            height: 100%;
+            display: none; /* Hide the canvas */
+        }
+        .movingRotatingDiv {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.9s; /* Smooth transition for rotation and movement */
+            position: absolute; /* Allow free movement */
+            border-radius: 50%;
+        }
+        #movingRotatingDiv1 {
+            left: 0px;
+            transition-duration: 4s;
+        }
+        #movingRotatingDiv2 {
+            left: 50px;
+            transition-duration: 4s;
+        }
+        #movingRotatingDiv3 {
+            left: 60px;
+            transition-duration: 4s;
+        }
+    </style>
+    
+    <!-- PyScript CSS -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.9.2/core.css">
+
+    <!-- This script tag bootstraps PyScript -->
+    <script type="module" src="https://pyscript.net/releases/2024.9.2/core.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h4 style="color: white;" id="h4">SPOT THE MIDDLE CIRCLE WHEN MOVEMENT STOPS</h4>
+    <p style="color: white;" id="item"></p>
+    <div id="canvasContainer">
+        <canvas id="myCanvas"></canvas>
+        <button id="movingRotatingDiv1" class="movingRotatingDiv"></button>
+        <button id="movingRotatingDiv2" class="movingRotatingDiv"></button>
+        <button id="movingRotatingDiv3" class="movingRotatingDiv"></button>
+    </div>
+
+    <script type="py" config="./pyscript.toml">   
+     from pyscript import when,document
+     from pyscript import display     
+@when("click", "#movingRotatingDiv1")
+def fun(event):
+    q = document.querySelector("#item")
+    q.innerText = "😞 Better luck next time"
+@when("click", "#movingRotatingDiv2")
+def fun(event):
+    q = document.querySelector("#item")
+    q.innerText = "😃 Good Job"
+@when("click", "#movingRotatingDiv3")
+def fun(event):
+    q = document.querySelector("#item")
+    q.innerText = "😞 Better luck next time"  
+</script>        
+    <script>
+window.onload = (submitDelay);
+
+function submitDelay() {
+  document.getElementById("movingRotatingDiv1").disabled = true;
+  document.getElementById("movingRotatingDiv2").disabled = true;
+  document.getElementById("movingRotatingDiv3").disabled = true;  
+  setTimeout(function() {
+    document.getElementById("movingRotatingDiv1").disabled = false;
+    document.getElementById("movingRotatingDiv2").disabled = false;
+    document.getElementById("movingRotatingDiv3").disabled = false;  
+  }, 20000);
+}
+
+const movingRotatingDiv1 = document.getElementById('movingRotatingDiv1');
+function moveAndRotateDiv1() {
+    // Generate random position within the container
+    const container = document.getElementById('canvasContainer');
+    const x = Math.random() * (container.clientWidth - 100); // 100 is the width of the div
+    const y = Math.random() * (container.clientHeight - 100); // 100 is the height of the div
+
+    // Apply the position and rotation to the div
+    movingRotatingDiv1.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function startMoving1() {
+    moveAndRotateDiv1(); // Move and rotate initially
+    const interval = setInterval(() => {
+        moveAndRotateDiv1(); // Move and rotate every 2 seconds
+    }, 2000); // Change position and rotation every 2 seconds
+
+    // Stop moving after 20 seconds
+    setTimeout(() => {
+        clearInterval(interval); // Stop the interval
+        // Optionally, you can stop the div at its current position and angle
+    }, 20000); // Change 20000 to any duration in milliseconds
+}
+
+// Start the movement and rotation
+startMoving1();
+
+const movingRotatingDiv2 = document.getElementById('movingRotatingDiv2');
+function moveAndRotateDiv2() {
+    // Generate random position within the container
+    const container = document.getElementById('canvasContainer');
+    const x = Math.random() * (container.clientWidth - 100); // 100 is the width of the div
+    const y = Math.random() * (container.clientHeight - 100); // 100 is the height of the div
+
+    // Apply the position and rotation to the div
+    movingRotatingDiv2.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function startMoving2() {
+    moveAndRotateDiv2(); // Move and rotate initially
+    const interval = setInterval(() => {
+        moveAndRotateDiv2(); // Move and rotate every 2 seconds
+    }, 2000); // Change position and rotation every 2 seconds
+
+    // Stop moving after 20 seconds
+    setTimeout(() => {
+        clearInterval(interval); // Stop the interval
+        // Optionally, you can stop the div at its current position and angle
+    }, 20000); // Change 20000 to any duration in milliseconds
+}
+
+// Start the movement and rotation
+startMoving2();
+
+const movingRotatingDiv3 = document.getElementById('movingRotatingDiv3');
+function moveAndRotateDiv3() {
+    // Generate random position within the container
+    const container = document.getElementById('canvasContainer');
+    const x = Math.random() * (container.clientWidth - 100); // 100 is the width of the div
+    const y = Math.random() * (container.clientHeight - 100); // 100 is the height of the div
+
+    // Apply the position and rotation to the div
+    movingRotatingDiv3.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function startMoving3() {
+    moveAndRotateDiv3(); // Move and rotate initially
+    const interval = setInterval(() => {
+        moveAndRotateDiv3(); // Move and rotate every 5 seconds
+    }, 5000); // Change position and rotation every 5 seconds
+
+    // Stop moving after 20 seconds
+    setTimeout(() => {
+        clearInterval(interval); // Stop the interval
+        // Optionally, you can stop the div at its current position and angle
+    }, 20000); // Change 20000 to any duration in milliseconds
+}
+
+// Start the movement and rotation
+startMoving3();
+
+</script>
+</body>
+</html>
